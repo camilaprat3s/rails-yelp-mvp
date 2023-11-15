@@ -1,0 +1,22 @@
+<!-- app/views/restaurants/show.html.erb -->
+<h1><%= @restaurant.name %></h1>
+<p><%= @restaurant.category %></p>
+<p><%= @restaurant.address %></p>
+<p><%= @restaurant.phone_number %></p>
+
+<h2>Reviews</h2>
+
+<% if @restaurant.reviews.any? %>
+  <% @restaurant.reviews.each do |review| %>
+    <div>
+      <p><strong>Rating:</strong> <%= review.rating %></p>
+      <p><%= review.content %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>No reviews yet.</p>
+<% end %>
+
+<%= link_to 'Add a Review', new_restaurant_review_path(@restaurant) %>
+
+<%= render 'reviews/form', restaurant: @restaurant, review: Review.new %>
